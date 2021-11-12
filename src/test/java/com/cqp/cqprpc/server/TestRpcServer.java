@@ -1,6 +1,5 @@
-package com.cqp.cqprpc.RpcServer;
+package com.cqp.cqprpc.server;
 
-import com.cqp.cqprpc.server.RpcServer;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
