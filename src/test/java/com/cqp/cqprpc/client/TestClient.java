@@ -22,8 +22,14 @@ public class TestClient {
 //    }
 
     @Test
-    public void sendRpcRequest(){
+    public void sendRpcRequest() throws InterruptedException {
         RpcClient rpcClient = new RpcClient("127.0.0.1", 8080);
         rpcClient.start();
+        rpcClient.stop(); // 这里是执行不了的，因为  channel.closeFuture().sync();阻塞住了
+    }
+
+    @Test
+    public void stop(){
+
     }
 }

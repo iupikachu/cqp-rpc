@@ -1,4 +1,4 @@
-package com.cqp.cqprpc.Message;
+package com.cqp.cqprpc.message;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -20,8 +20,16 @@ public abstract class Message implements Serializable {
     // 异步通信 序列号
     private int sequenceId;
 
+    public Message() {}
+
+    public Message(int sequenceId) {
+        this.sequenceId = sequenceId;
+    }
+
     // 消息类型
     private int messageType;
+
+
 
     /**
      * 根据消息类型，得到消息类

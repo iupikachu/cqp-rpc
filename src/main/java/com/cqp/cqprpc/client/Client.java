@@ -1,6 +1,6 @@
 package com.cqp.cqprpc.client;
 
-import com.cqp.cqprpc.Message.RpcRequest;
+import com.cqp.cqprpc.message.RpcRequest;
 
 /**
  * @author cqp

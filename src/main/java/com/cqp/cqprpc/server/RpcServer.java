@@ -1,20 +1,16 @@
 package com.cqp.cqprpc.server;
 
-import io.netty.bootstrap.Bootstrap;
+import com.cqp.cqprpc.common.Codec.MessageCodecSharable;
+import com.cqp.cqprpc.common.Codec.ProcotolFrameDecoder;
+import com.cqp.cqprpc.server.handler.RpcRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-
-import java.nio.charset.Charset;
 
 /**
  * @author cqp
@@ -39,13 +35,17 @@ public class RpcServer extends Server{
        bootstrap = new ServerBootstrap();
        bootstrap.channel(NioServerSocketChannel.class);
        bootstrap.group(boss, worker);
-       LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
 
-        bootstrap.childHandler(new ChannelInitializer<NioSocketChannel>() {
+       LoggingHandler loggingHandler = new LoggingHandler(LogLevel.DEBUG);
+       MessageCodecSharable messageCodec = new MessageCodecSharable();
+       RpcRequestHandler rpcRequestHandler = new RpcRequestHandler();
+       bootstrap.childHandler(new ChannelInitializer<NioSocketChannel>() {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
-                ch.pipeline().addLast(LOGGING_HANDLER);
-
+                ch.pipeline().addLast(new ProcotolFrameDecoder());
+                ch.pipeline().addLast(loggingHandler);
+                ch.pipeline().addLast(messageCodec);
+                ch.pipeline().addLast(rpcRequestHandler);
             }
         });
 

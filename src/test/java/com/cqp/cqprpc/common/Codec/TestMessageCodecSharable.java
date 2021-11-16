@@ -1,6 +1,6 @@
 package com.cqp.cqprpc.common.Codec;
 
-import com.cqp.cqprpc.Message.RpcRequest;
+import com.cqp.cqprpc.message.RpcRequest;
 import com.cqp.cqprpc.common.protocol.User;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
@@ -8,7 +8,6 @@ import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.handler.logging.LoggingHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import io.netty.channel.ChannelHandlerContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class TestMessageCodecSharable {
                 new MessageCodecSharable()
         );
         // 测试 encode 方法
-        RpcRequest rpcRequest = new RpcRequest("UserService","getUser", User.class,new Class[]{Integer.class,String.class},new Object[]{1,"a"});
+        RpcRequest rpcRequest = new RpcRequest(1,"UserService","getUser", User.class,new Class[]{Integer.class,String.class},new Object[]{1,"a"});
         channel.writeOutbound(rpcRequest);
 
         // 测试 decode 方法

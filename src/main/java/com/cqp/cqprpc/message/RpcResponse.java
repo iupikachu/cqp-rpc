@@ -1,4 +1,4 @@
-package com.cqp.cqprpc.Message;
+package com.cqp.cqprpc.message;
 
 /**
  * @author cqp

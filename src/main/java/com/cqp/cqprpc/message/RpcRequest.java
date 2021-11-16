@@ -1,4 +1,4 @@
-package com.cqp.cqprpc.Message;
+package com.cqp.cqprpc.message;
 
 import java.util.Arrays;
 
@@ -43,9 +43,11 @@ public class RpcRequest extends Message{
 
     // 没有无参构造器，jackson 反序列化会报错
     public RpcRequest() {
+        super();
     }
 
-    public RpcRequest(String intefaceName, String methodName, Class<?> returnType, Class[] parameterTypes, Object[] parameterValues) {
+    public RpcRequest(Integer sequenceId,String intefaceName, String methodName, Class<?> returnType, Class[] parameterTypes, Object[] parameterValues) {
+        super(sequenceId);
         this.intefaceName = intefaceName;
         this.methodName = methodName;
         this.returnType = returnType;

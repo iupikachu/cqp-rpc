@@ -1,6 +1,6 @@
 package com.cqp.cqprpc.common.Codec;
 
-import com.cqp.cqprpc.Message.Message;
+import com.cqp.cqprpc.message.Message;
 import com.cqp.cqprpc.common.protocol.Serializer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
