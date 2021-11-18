@@ -1,5 +1,9 @@
 package com.cqp.cqprpc.service;
 
+
+import com.cqp.cqprpc.annotation.RpcService;
+
+@RpcService
 public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(String name) {
