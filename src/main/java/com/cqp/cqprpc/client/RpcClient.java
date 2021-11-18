@@ -1,6 +1,7 @@
 package com.cqp.cqprpc.client;
 
 import com.cqp.cqprpc.client.handler.RpcResponseHandler;
+import com.cqp.cqprpc.common.SequenceIdGenerator;
 import com.cqp.cqprpc.message.RpcRequest;
 import com.cqp.cqprpc.common.Codec.MessageCodecSharable;
 import com.cqp.cqprpc.common.Codec.ProcotolFrameDecoder;
@@ -55,11 +56,11 @@ public class RpcClient extends Client{
             });
             channel = bootstrap.connect(this.getIp_address(), this.getPort()).sync().channel();
 
-            int sequenceId = 1;  // 后续修改为 id 生成器
+            int sequenceId = SequenceIdGenerator.nextId();  // 后续修改为 id 生成器
             // 模拟测试发送一个 rpc-request
             channel.writeAndFlush(
                     new RpcRequest(
-                            sequenceId,
+                                        sequenceId,
                             "com.cqp.cqprpc.service.HelloService",
                             "sayHello",
                                         String.class,
@@ -101,8 +102,7 @@ public class RpcClient extends Client{
             channel.close();
             System.out.println("通道关闭了");
         } catch (Exception e) {
-            //throw new RuntimeException("客户端关闭出错",e);
-            e.printStackTrace();
+            throw new RuntimeException("客户端关闭出错",e);
         }
     }
 
