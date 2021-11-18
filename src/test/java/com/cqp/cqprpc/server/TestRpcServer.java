@@ -18,7 +18,6 @@ public class TestRpcServer {
     public void TestRpcServer(){
         RpcServer rpcServer = new RpcServer(8080);
         rpcServer.start();
-
     }
 
 
