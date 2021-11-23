@@ -20,5 +20,11 @@ public class TestRpcServer {
         rpcServer.start();
     }
 
+    @Test
+    public void TestReflection() throws ClassNotFoundException {
+        String className = "com.cqp.cqprpc.service.UserServiceImpl";
+        Class<?> clazz = Class.forName(className);
+
+    }
 
 }
