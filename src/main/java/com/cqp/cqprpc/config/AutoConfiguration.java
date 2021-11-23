@@ -1,5 +1,7 @@
 package com.cqp.cqprpc.config;
 
+import com.cqp.cqprpc.client.RpcClientProxy;
+import com.cqp.cqprpc.server.RpcServer;
 import com.cqp.cqprpc.server.register.DefaultRpcProcessor;
 import com.cqp.cqprpc.server.register.ServiceRegister;
 import com.cqp.cqprpc.server.register.ZooKeeperRegister;
@@ -25,6 +27,17 @@ public class AutoConfiguration {
     @Bean
     public ServiceRegister serviceRegister() throws UnknownHostException {
         String host = InetAddress.getLocalHost().getHostAddress();
-       return new ZooKeeperRegister("47.110.154.185:2181","host","18000");
+        return new ZooKeeperRegister("47.110.154.185:2181","host","18001");
+    }
+
+    @Bean
+    public RpcServer rpcServer(){
+      return   new RpcServer(18001);
+    }
+
+    @Bean
+    public RpcClientProxy rpcClientProxy() throws UnknownHostException {
+        String host = InetAddress.getLocalHost().getHostAddress();
+        return new RpcClientProxy("host",18001);
     }
 }
