@@ -1,6 +1,7 @@
 package com.cqp.cqprpc.client.handler;
 
 import com.cqp.cqprpc.message.RpcResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.concurrent.Promise;
@@ -24,12 +25,18 @@ public class RpcResponseHandler extends SimpleChannelInboundHandler<RpcResponse>
         // 拿到 promise  返回value值，并且将其移除
         Promise<Object> promise = PROMISES.remove(msg.getSequenceId());
         if(promise != null) {
+
+            ObjectMapper objectMapper = new ObjectMapper();
             Object returnValue = msg.getReturnValue();
+            Class<?> returnClassType = msg.getReturnClassType();
+            Object object = objectMapper.convertValue(returnValue, returnClassType);
             Exception exception = msg.getException();
+
             if (exception != null) {
                 promise.setFailure(exception);
             } else {
-                promise.setSuccess(returnValue);
+
+                promise.setSuccess(object);
             }
         }
     }
