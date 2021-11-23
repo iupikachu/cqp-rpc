@@ -65,7 +65,7 @@ public class ZooKeeperRegister extends DefaultServiceRegister implements Service
         String serviceName = serviceDTO.getInterfaceName();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            String json = objectMapper.writeValueAsString(serviceName);
+            String json = objectMapper.writeValueAsString(serviceDTO);
             String encode = URLEncoder.encode(json, "UTF-8");
 
             String servicePath = RpcConstant.PATH_DELIMITER + serviceName + "/service";   // /com.cqp.cqprpc.service.HelloService/service
