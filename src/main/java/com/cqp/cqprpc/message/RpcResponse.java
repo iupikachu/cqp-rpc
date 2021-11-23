@@ -17,6 +17,9 @@ public class RpcResponse extends Message{
     // 方法调用返回值
     private Object returnValue;
 
+    // 方法调用返回值类型
+    private Class<?> returnClassType;
+
     // 方法调用出错，返回异常对象
     private Exception exception;
 
@@ -24,9 +27,10 @@ public class RpcResponse extends Message{
     public RpcResponse() {
     }
 
-    public RpcResponse(Object returnValue, Exception exception) {
+    public RpcResponse(Object returnValue, Exception exception, Class<?> returnClassType) {
         this.returnValue = returnValue;
         this.exception = exception;
+        this.returnClassType = returnClassType;
     }
 
     public Object getReturnValue() {
@@ -45,10 +49,19 @@ public class RpcResponse extends Message{
         this.exception = exception;
     }
 
+    public Class<?> getReturnClassType() {
+        return returnClassType;
+    }
+
+    public void setReturnClassType(Class<?> returnClassType) {
+        this.returnClassType = returnClassType;
+    }
+
     @Override
     public String toString() {
         return "RpcResponse{" +
                 "returnValue=" + returnValue +
+                ", returnClassType=" + returnClassType +
                 ", exception=" + exception +
                 '}';
     }
