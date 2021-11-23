@@ -72,7 +72,6 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf,Message>
 
         log.debug("{},{},{},{},{},{},",magicNum,version,serializon,messageType,sequenceId,length);
         log.debug("{}",message);
-
         out.add(message);
     }
 }
